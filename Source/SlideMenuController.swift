@@ -85,13 +85,13 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open var leftContainerView = UIView()
     open var topContainerView = UIView()
     open var rightContainerView =  UIView()
-    @objc open var mainViewController: UIViewController?
-    @objc open var leftViewController: UIViewController?
+    open var mainViewController: UIViewController?
+    open var leftViewController: UIViewController?
     open var leftPanGesture: UIPanGestureRecognizer?
     open var leftTapGesture: UITapGestureRecognizer?
-    @objc open var topViewController: UIViewController?
+    open var topViewController: UIViewController?
     open var topTapGesture: UITapGestureRecognizer?
-    @objc open var rightViewController: UIViewController?
+    open var rightViewController: UIViewController?
     open var rightPanGesture: UIPanGestureRecognizer?
     open var rightTapGesture: UITapGestureRecognizer?
     
@@ -1367,6 +1367,55 @@ extension UIViewController {
     
     @objc public func closeRight() {
         slideMenuController()?.closeRight()
+    }
+    
+    @objc public func leftIsOpen() -> ObjCBool {
+        if (slideMenuController()?.isLeftOpen())!
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
+    @objc public func topIsOpen() -> ObjCBool {
+        if (slideMenuController()?.isTopOpen())!
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
+    @objc public func rightIsOpen() -> ObjCBool {
+        if (slideMenuController()?.isRightOpen())!
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
+    @objc public func getMainVc() -> UIViewController? {
+        return slideMenuController()?.mainViewController
+    }
+    
+    @objc public func getLeftVc() -> UIViewController? {
+        return slideMenuController()?.leftViewController
+    }
+    
+    @objc public func getTopVc() -> UIViewController? {
+        return slideMenuController()?.topViewController
+    }
+    
+    @objc public func getRightVc() -> UIViewController? {
+        return slideMenuController()?.rightViewController
     }
     
     // Please specify if you want menu gesuture give priority to than targetScrollView
