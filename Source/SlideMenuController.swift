@@ -1323,9 +1323,16 @@ extension UIViewController {
         navigationItem.leftBarButtonItem = leftButton
     }
     
-    public func addTopBarButtonWithImage(_ buttonImage: UIImage) {
+    public func addTopBarButtonWithImage(_ buttonImage: UIImage, _ isLeft: ObjCBool) {
         let topButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.toggleTop))
-        navigationItem.leftBarButtonItem = topButton
+        if(isLeft.boolValue)
+        {
+            navigationItem.leftBarButtonItem = topButton
+        }
+        else
+        {
+            navigationItem.rightBarButtonItem = topButton
+        }
     }
     
     public func addRightBarButtonWithImage(_ buttonImage: UIImage) {
