@@ -1318,64 +1318,48 @@ extension UIViewController {
         return nil
     }
     
-    public func addLeftBarButtonWithImage(_ buttonImage: UIImage) {
+    public func addLeftBarButtonWithImage(_ buttonImage: UIImage, _ getItems: [UIBarButtonItem]) {
         
         let leftButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.toggleLeft))
         
-        if((navigationItem.leftBarButtonItems?.count)! > 0)
+        let items = NSMutableArray()
+        items.add(leftButton)
+        if(getItems.count > 0)
         {
-            var items = navigationItem.leftBarButtonItems
-            items?.insert(leftButton, at: 0)
-            navigationItem.leftBarButtonItems = items
+            items.addObjects(from: getItems)
         }
-        else
-        {
-            navigationItem.leftBarButtonItem = leftButton
-        }
+        navigationItem.leftBarButtonItems = items as? [UIBarButtonItem]
     }
     
-    public func addTopBarButtonWithImage(_ buttonImage: UIImage, _ isLeft: ObjCBool) {
+    public func addTopBarButtonWithImage(_ buttonImage: UIImage, _ isLeft: ObjCBool, _ getItems: [UIBarButtonItem]) {
         let topButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.toggleTop))
+        
+        let items = NSMutableArray()
+        items.add(topButton)
+        if(getItems.count > 0)
+        {
+            items.addObjects(from: getItems)
+        }
         if(isLeft.boolValue)
         {
-            if((navigationItem.leftBarButtonItems?.count)! > 0)
-            {
-                var items = navigationItem.leftBarButtonItems
-                items?.insert(topButton, at: 0)
-                navigationItem.leftBarButtonItems = items
-            }
-            else
-            {
-                navigationItem.leftBarButtonItem = topButton
-            }
+            navigationItem.leftBarButtonItems = items as? [UIBarButtonItem]
         }
         else
         {
-            if((navigationItem.leftBarButtonItems?.count)! > 0)
-            {
-                var items = navigationItem.rightBarButtonItems
-                items?.insert(topButton, at: 0)
-                navigationItem.rightBarButtonItems = items
-            }
-            else
-            {
-                navigationItem.rightBarButtonItem = topButton
-            }
+            navigationItem.rightBarButtonItems = items as? [UIBarButtonItem]
         }
     }
     
-    public func addRightBarButtonWithImage(_ buttonImage: UIImage) {
+    public func addRightBarButtonWithImage(_ buttonImage: UIImage, _ getItems: [UIBarButtonItem]) {
         let rightButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.toggleRight))
-        if((navigationItem.rightBarButtonItems?.count)! > 0)
+        
+        let items = NSMutableArray()
+        items.add(rightButton)
+        if(getItems.count > 0)
         {
-            var items = navigationItem.rightBarButtonItems
-            items?.insert(rightButton, at: 0)
-            navigationItem.rightBarButtonItems = items
+            items.addObjects(from: getItems)
         }
-        else
-        {
-            navigationItem.rightBarButtonItem = rightButton
-        }
+        navigationItem.rightBarButtonItems = items as? [UIBarButtonItem]
     }
     
     @objc public func toggleLeft() {
