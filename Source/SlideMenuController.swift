@@ -1319,25 +1319,63 @@ extension UIViewController {
     }
     
     public func addLeftBarButtonWithImage(_ buttonImage: UIImage) {
+        
         let leftButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.toggleLeft))
-        navigationItem.leftBarButtonItem = leftButton
+        
+        if((navigationItem.leftBarButtonItems?.count)! > 0)
+        {
+            var items = navigationItem.leftBarButtonItems
+            items?.insert(leftButton, at: 0)
+            navigationItem.leftBarButtonItems = items
+        }
+        else
+        {
+            navigationItem.leftBarButtonItem = leftButton
+        }
     }
     
     public func addTopBarButtonWithImage(_ buttonImage: UIImage, _ isLeft: ObjCBool) {
         let topButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.toggleTop))
         if(isLeft.boolValue)
         {
-            navigationItem.leftBarButtonItem = topButton
+            if((navigationItem.leftBarButtonItems?.count)! > 0)
+            {
+                var items = navigationItem.leftBarButtonItems
+                items?.insert(topButton, at: 0)
+                navigationItem.leftBarButtonItems = items
+            }
+            else
+            {
+                navigationItem.leftBarButtonItem = topButton
+            }
         }
         else
         {
-            navigationItem.rightBarButtonItem = topButton
+            if((navigationItem.leftBarButtonItems?.count)! > 0)
+            {
+                var items = navigationItem.rightBarButtonItems
+                items?.insert(topButton, at: 0)
+                navigationItem.rightBarButtonItems = items
+            }
+            else
+            {
+                navigationItem.rightBarButtonItem = topButton
+            }
         }
     }
     
     public func addRightBarButtonWithImage(_ buttonImage: UIImage) {
         let rightButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.toggleRight))
-        navigationItem.rightBarButtonItem = rightButton
+        if((navigationItem.rightBarButtonItems?.count)! > 0)
+        {
+            var items = navigationItem.rightBarButtonItems
+            items?.insert(rightButton, at: 0)
+            navigationItem.rightBarButtonItems = items
+        }
+        else
+        {
+            navigationItem.rightBarButtonItem = rightButton
+        }
     }
     
     @objc public func toggleLeft() {
