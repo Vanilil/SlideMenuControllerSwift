@@ -90,6 +90,8 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open var leftPanGesture: UIPanGestureRecognizer?
     open var leftTapGesture: UITapGestureRecognizer?
     open var topViewController: UIViewController?
+    open var topLeftViewController: UIViewController?
+    open var topRightViewController: UIViewController?
     open var topTapGesture: UITapGestureRecognizer?
     open var rightViewController: UIViewController?
     open var rightPanGesture: UIPanGestureRecognizer?
@@ -806,6 +808,22 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
         return leftContainerView.frame.origin.x <= leftMinOrigin()
     }
     
+    open override func toggleTopLeft() {
+        if topLeftViewController != nil
+        {
+            self.changeTopViewController(topLeftViewController!, closeTop: true)
+        }
+        self.toggleTop()
+    }
+    
+    open override func toggleTopRight() {
+        if topRightViewController != nil
+        {
+            self.changeTopViewController(topRightViewController!, closeTop: true)
+        }
+        self.toggleTop()
+    }
+    
     open override func toggleTop() {
         if isTopOpen() {
             closeTop()
@@ -1332,7 +1350,16 @@ extension UIViewController {
     }
     
     public func addTopBarButtonWithImage(_ buttonImage: UIImage, _ isLeft: ObjCBool, _ getItems: [UIBarButtonItem]) {
-        let topButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.toggleTop))
+        var topButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.toggleTop))
+        
+        if isLeft.boolValue
+        {
+            topButton = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.toggleTopLeft))
+        }
+        else
+        {
+            topButton = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.toggleTopRight))
+        }
         
         let items = NSMutableArray()
         items.add(topButton)
@@ -1368,6 +1395,14 @@ extension UIViewController {
     
     @objc public func toggleTop() {
         slideMenuController()?.toggleTop()
+    }
+    
+    @objc public func toggleTopLeft() {
+        slideMenuController()?.toggleTopLeft()
+    }
+    
+    @objc public func toggleTopRight() {
+        slideMenuController()?.toggleTopRight()
     }
     
     @objc public func toggleRight() {
