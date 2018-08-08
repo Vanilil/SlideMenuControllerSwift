@@ -92,6 +92,7 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open var topViewController: UIViewController?
     open var topLeftViewController: UIViewController?
     open var topRightViewController: UIViewController?
+    open var topPanGesture: UIPanGestureRecognizer?
     open var topTapGesture: UITapGestureRecognizer?
     open var rightViewController: UIViewController?
     open var rightPanGesture: UIPanGestureRecognizer?
@@ -214,14 +215,19 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
             self.rightContainerView.isHidden = false
             self.topContainerView.isHidden = false
             
-            if self.leftPanGesture != nil && self.leftPanGesture != nil {
+            if self.leftPanGesture != nil {
                 self.removeLeftGestures()
                 self.addLeftGestures()
             }
             
-            if self.rightPanGesture != nil && self.rightPanGesture != nil {
+            if self.rightPanGesture != nil {
                 self.removeRightGestures()
                 self.addRightGestures()
+            }
+            
+            if self.topPanGesture != nil {
+                self.removeTopGestures()
+                self.addTopGestures()
             }
         })
     }
