@@ -440,6 +440,7 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open func handleContainerSizeChange() {
         
         if leftViewController != nil {
+            leftContainerView.removeFromSuperview()
             var leftFrame: CGRect = view.bounds
             leftFrame.size.width = SlideMenuOptions.leftViewWidth
             leftFrame.origin.x = leftMinOrigin()
@@ -452,6 +453,7 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         if topViewController != nil {
+            topContainerView.removeFromSuperview()
             var topFrame: CGRect = view.bounds
             topFrame.size.height = SlideMenuOptions.topViewHeight
             topFrame.origin.y = topMinOrigin()
@@ -464,6 +466,7 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         if rightViewController != nil {
+            rightContainerView.removeFromSuperview()
             var rightFrame: CGRect = view.bounds
             rightFrame.size.width = SlideMenuOptions.rightViewWidth
             rightFrame.origin.x = rightMinOrigin()
