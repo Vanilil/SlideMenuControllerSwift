@@ -461,6 +461,28 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
             topContainerView = UIView(frame: topFrame)
             view.insertSubview(topContainerView, at: 2)
             setUpViewController(topContainerView, targetViewController: topViewController)
+        } else if topLeftViewController != nil {
+            topContainerView.removeFromSuperview()
+            var topFrame: CGRect = view.bounds
+            topFrame.size.height = SlideMenuOptions.topViewHeight
+            topFrame.origin.y = topMinOrigin()
+            let topOffset: CGFloat = 0
+            topFrame.origin.x = topFrame.origin.x + topOffset
+            topFrame.size.width = topFrame.size.width - topOffset
+            topContainerView = UIView(frame: topFrame)
+            view.insertSubview(topContainerView, at: 2)
+            setUpViewController(topContainerView, targetViewController: topLeftViewController)
+        } else if topRightViewController != nil {
+            topContainerView.removeFromSuperview()
+            var topFrame: CGRect = view.bounds
+            topFrame.size.height = SlideMenuOptions.topViewHeight
+            topFrame.origin.y = topMinOrigin()
+            let topOffset: CGFloat = 0
+            topFrame.origin.x = topFrame.origin.x + topOffset
+            topFrame.size.width = topFrame.size.width - topOffset
+            topContainerView = UIView(frame: topFrame)
+            view.insertSubview(topContainerView, at: 2)
+            setUpViewController(topContainerView, targetViewController: topRightViewController)
         }
         
         if rightViewController != nil {
