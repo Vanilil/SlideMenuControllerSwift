@@ -991,6 +991,8 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open func changeTopViewController(_ topViewController: UIViewController, closeTop:Bool) {
         
         removeViewController(self.topViewController)
+        removeViewController(self.topLeftViewController)
+        removeViewController(self.topRightViewController)
         self.topViewController = topViewController
         setUpViewController(topContainerView, targetViewController: topViewController)
         if closeTop {
