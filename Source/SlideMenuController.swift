@@ -289,8 +289,6 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
         self.delegate?.topWillOpen?()
         
         setOpenWindowLevel()
-        // for call viewWillAppear of leftViewController
-        topViewController?.beginAppearanceTransition(isTopHidden(), animated: true)
         openTopWithVelocity(0.0)
         
         track(.topTapOpen)
@@ -708,7 +706,6 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
         }) { [weak self](Bool) -> Void in
             if let strongSelf = self {
                 strongSelf.disableContentInteraction()
-                strongSelf.topViewController?.endAppearanceTransition()
                 strongSelf.delegate?.topDidOpen?()
             }
         }
@@ -858,7 +855,7 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     open override func toggleTopLeft() {
-        if topLeftViewController != nil
+        if topLeftViewController != nil, topLeftViewController != topViewController
         {
             self.changeTopViewController(topLeftViewController!, closeTop: true)
         }
@@ -866,7 +863,7 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     open override func toggleTopRight() {
-        if topRightViewController != nil
+        if topRightViewController != nil, topRightViewController != topViewController
         {
             self.changeTopViewController(topRightViewController!, closeTop: true)
         }
