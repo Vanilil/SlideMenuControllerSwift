@@ -327,7 +327,6 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
         
         self.delegate?.topWillClose?()
         
-        topViewController?.beginAppearanceTransition(isTopHidden(), animated: true)
         closeTopWithVelocity(0.0)
         setCloseWindowLevel()
     }
@@ -819,7 +818,6 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let strongSelf = self {
                 strongSelf.removeShadow(strongSelf.topContainerView)
                 strongSelf.enableContentInteraction()
-                strongSelf.topViewController?.endAppearanceTransition()
                 strongSelf.delegate?.topDidClose?()
             }
         }
